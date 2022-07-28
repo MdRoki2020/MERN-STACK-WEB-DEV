@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Axios from 'axios';
+import { BsFillBagDashFill } from "react-icons/bs"; 
 
 function HomeBanner(props) {
 
@@ -45,6 +46,8 @@ function HomeBanner(props) {
       <input ref={Password} placeholder="Password"/>
       <button onClick={click}>Click</button> */}
       {/* <button onClick={click}>Click</button> */}
+
+      <button>click<BsFillBagDashFill /></button>
     </div>
   )
 }

@@ -37,8 +37,8 @@ app.use(limiter);
 
 
 //Mongodb connection...
-let URI="mongodb://127.0.0.1:27017/";
-let OPTION={user:'',pass:'',autoIndex:true}
+let URI="mongodb+srv://<username>:<password>@cluster0.l3mtknu.mongodb.net/CRUD?retryWrites=true&w=majority";
+let OPTION={user:'rsroki2022',pass:'AaBbCc2580!!@@',autoIndex:true}
 
 mongoose.connect(URI,OPTION,(err)=>{
     console.log('Connection Success')

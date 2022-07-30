@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Navbar,Container,Nav,Form,FormControl,Button } from 'react-bootstrap';
 import {BrowserRouter as Router,Route,Link, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomePage from './Pages/HomePage';
+import ReadPage from './Pages/ReadPage';
 import ErrorPage from './Pages/ErrorPage'
+import CreatePage from './Pages/CreatePage';
+import UpdatePage from './Pages/UpdatePage';
 
 export default class App extends Component {
   render() {
@@ -20,9 +22,9 @@ export default class App extends Component {
                     <Button variant="outline-success">Search</Button>
                 </Form>
                 <Nav className="">
-                    <Nav.Link as={Link} to={'/'}> About</Nav.Link>
-                    <Nav.Link as={Link} to={'/contact'}> Contact</Nav.Link>
-                    <Nav.Link as={Link} to={'/admin'}> Admin</Nav.Link>
+                    <Nav.Link as={Link} to={'/'}> Read</Nav.Link>
+                    <Nav.Link as={Link} to={'/create'}> Create</Nav.Link>
+                    <Nav.Link as={Link} to={'/update'}> Update</Nav.Link>
                     <Nav.Link as={Link} to={'/dashboard'}> Dashboard</Nav.Link>
                     
                 </Nav>
@@ -32,7 +34,9 @@ export default class App extends Component {
         </div>
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ReadPage />} />
+          <Route path="/create" element={<CreatePage />} />
+          <Route path="/update" element={<UpdatePage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>

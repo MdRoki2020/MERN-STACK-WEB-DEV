@@ -26,7 +26,7 @@ export function Create(ProductName,ProductCode,Img,UnitPrice,Qty,TotalPrice){
 
 
 export function Read(){
-    let URL="api/v1/ReadProduct"
+    let URL="http://localhost:5000/api/v1/ReadProduct"
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -42,19 +42,37 @@ export function Read(){
 
 
 
-export function Update(id){
-    let URL="api/v1/UpdateProduct/"+id;
+export function ReadById(id){
+    let URL="http://localhost:5000/api/v1/ReadProductById/"+id;
+    return Axios.get(URL).then((res)=>{
 
-    // let PostBody={
-    //     ProductName:ProductName,
-    //     ProductCode:ProductCode,
-    //     Img:Img,
-    //     UnitPrice:UnitPrice,
-    //     Qty:Qty,
-    //     TotalPrice:TotalPrice
-    // }
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
 
-    return Axios.post(URL,).then((res)=>{
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
+
+
+export function Update(id,ProductName,ProductCode,Img,UnitPrice,Qty,TotalPrice){
+    let URL="http://localhost:5000/api/v1/UpdateProduct/"+id;
+
+    let PostBody={
+        ProductName:ProductName,
+        ProductCode:ProductCode,
+        Img:Img,
+        UnitPrice:UnitPrice,
+        Qty:Qty,
+        TotalPrice:TotalPrice
+    }
+
+    return Axios.post(URL,PostBody).then((res)=>{
         if(res.status===200){
             return true;
         }else{
@@ -68,11 +86,11 @@ export function Update(id){
 
 
 export function Delete(id){
-    let URL="api/v1/DeleteProduct/"+id;
+    let URL="http://localhost:5000/api/v1/DeleteProduct/"+id;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
-            return res.data['data'];
+            return true
         }else{
             return false
         }

@@ -8,6 +8,8 @@ const router=express.Router();
 router.post('/CreateProduct',ProductController.CreateProduct);
 //read
 router.get('/ReadProduct',ProductController.ReadProduct);
+//read by id
+router.get('/ReadProductById/:id',ProductController.ReadProductById);
 //update
 router.post('/UpdateProduct/:id',ProductController.UpdateProduct);
 //delete

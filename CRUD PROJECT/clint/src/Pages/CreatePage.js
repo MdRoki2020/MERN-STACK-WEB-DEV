@@ -46,7 +46,7 @@ function CreatePage() {
             'You clicked the button!',
             'success'
           )
-      }
+    }
 
     
   return (
@@ -72,7 +72,7 @@ function CreatePage() {
         </div>
         <div className="col-md-4  p-2">
         <label className=""> Qty</label>
-        <input ref={(input)=>Qty=input}  type="text" className="form-control " required/>
+        <input ref={(input)=>Qty=input}  type="number" className="form-control " required/>
         </div>
         <div className="col-md-4  p-2">
         <label className=""> Total Price</label>

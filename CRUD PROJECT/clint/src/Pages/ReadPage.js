@@ -13,15 +13,20 @@ function ReadPage() {
   const [dataList,setDataList]=useState([]);
 
   useEffect(()=>{
+    getProduct();
+  },[])
+
+  const getProduct=()=>{
     Read().then((data)=>{
       setDataList(data)
     })
-  },[])
+  }
 
 
   const DeleteItem=(id)=>{
     Delete(id).then((data)=>{
       if(data===true){
+        getProduct()
         successMes()
         
       }else{

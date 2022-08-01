@@ -7,9 +7,38 @@ db.collection_name.find({}) / db.collection.aggregate([])
 3.Row Count:
 db.collection_name.find({}).count('total')
 
-4.Sorting By Roll:
-db.collection.aggregate([
+4.Sorting By Roll (Asending Order):
+db.collection_name.aggregate([
 
 {$sort:{roll:1}}
+
+])
+
+
+5.Sorting By Roll (desending Order):
+db.collection_name.aggregate([
+
+{$sort:{roll:-1}}
+
+])
+
+
+6. Limit :
+db.collection_name.find({}).limit(3)
+
+
+7.showing First 5 data :
+db.collection_name.aggregate([
+
+{$sort:{_id:1}},
+{$limit:5}
+
+])
+
+
+8.Select By Match Condition:
+db.collection.aggregate([
+
+{$match:{roll:{$gte:120}}}
 
 ])

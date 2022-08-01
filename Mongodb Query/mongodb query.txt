@@ -42,3 +42,47 @@ db.collection.aggregate([
 {$match:{roll:{$gte:120}}}
 
 ])
+
+9.Select Like
+db.collection.aggregate(
+[
+
+{$match:{name:/R/}}
+
+]
+
+)
+
+10.Projection (specific selection):
+db.collection.aggregate(
+
+[
+
+{$project:{name:1,city:1}}
+
+]
+)
+
+11.Skip And Limit :
+db.collection.aggregate(
+
+[
+
+{$skip:0},
+{$limit:2}
+
+]
+)
+
+12.Group By:
+
+db.collection.aggregate(
+
+[
+
+{$group:{_id:"$city"}}
+
+]
+)
+
+13.

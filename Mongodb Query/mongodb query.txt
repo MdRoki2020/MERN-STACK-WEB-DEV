@@ -1,0 +1,4 @@
+1. Data Insert:
+db.table_name.insert() / db.table_name.insertMany()
+
+2.

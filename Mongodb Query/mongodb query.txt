@@ -1,4 +1,15 @@
 1. Data Insert:
-db.table_name.insert() / db.table_name.insertMany()
+db.collection_name.insert({}) / db.table_name.insertMany([{}])
 
-2.
+2.Data Find:
+db.collection_name.find({}) / db.collection.aggregate([])
+
+3.Row Count:
+db.collection_name.find({}).count('total')
+
+4.Sorting By Roll:
+db.collection.aggregate([
+
+{$sort:{roll:1}}
+
+])

@@ -75,7 +75,6 @@ db.collection.aggregate(
 )
 
 12.Group By:
-
 db.collection.aggregate(
 
 [
@@ -85,4 +84,22 @@ db.collection.aggregate(
 ]
 )
 
-13.
+13.Group By Sum:
+db.collection.aggregate(
+
+[
+
+{$group:{_id:"$city",total:{$sum:"$roll"}}}
+
+]
+)
+
+14. Group By Max:
+db.collection.aggregate(
+
+[
+
+{$group:{_id:"$city",max:{$max:"$roll"}}}
+
+]
+)

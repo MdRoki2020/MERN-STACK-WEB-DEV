@@ -36,7 +36,7 @@ app.use(limiter);
 
 
 //Mongodb connection...
-let URI="mongodb+srv://<username>:<password>@cluster0.l3mtknu.mongodb.net/CRUD?retryWrites=true&w=majority";
+let URI="mongodb+srv://<username>:<password>@cluster0.l3mtknu.mongodb.net/task_manager?retryWrites=true&w=majority";
 let OPTION={user:'rsroki2022',pass:'AaBbCc2580!!@@',autoIndex:true}
 
 mongoose.connect(URI,OPTION,(err)=>{

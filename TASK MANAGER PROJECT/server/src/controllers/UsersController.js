@@ -11,3 +11,9 @@ exports.registration=(req,res)=>{
         }
     })
 }
+
+
+//profile Update
+exports.profileUpdate=(req,res)=>{
+    
+}

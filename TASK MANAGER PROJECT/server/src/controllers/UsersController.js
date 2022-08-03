@@ -14,7 +14,7 @@ exports.registration=(req,res)=>{
 }
 
 
-//profile Update
+//Login
 exports.login=(req,res)=>{
     let reqBody=req.body;
 
@@ -33,6 +33,21 @@ exports.login=(req,res)=>{
             }else{
                 res.status(401).json({status:"unauthorized"})
             }
+        }
+    })
+}
+
+
+//user profile update
+exports.profileUpdate=(req,res)=>{
+    let email=req.headers['email'];
+    let reqBody=req.body;
+
+    UserModel.updateOne({email:email},reqBody,(err,data)=>{
+        if(err){
+            res.status(400).json({status:"fail",data:err})
+        }else{
+            res.status(200).json({status:"success",data:data})
         }
     })
 }

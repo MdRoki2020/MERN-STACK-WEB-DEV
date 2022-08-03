@@ -8,5 +8,5 @@ const DataSchema=mongoose.Schema({
     createdDate:{type:Date,default:Date.now()}
 },{versionKey:false});
 
-const TaskModel=mongoose.model('task',DataSchema);
+const TaskModel=mongoose.model('tasks',DataSchema);
 module.exports=TaskModel;

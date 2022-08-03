@@ -9,7 +9,6 @@ module.exports=(req,res,next)=>{
         }
         else {
             let email=decoded['data'];
-            console.log(email)
             req.headers.email=email
             next();
         }

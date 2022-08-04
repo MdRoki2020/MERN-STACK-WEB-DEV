@@ -12,7 +12,7 @@ import Page404 from './pages/Page404'
 import ProfilePage from './pages/ProfilePage'
 import ProgressPage from './pages/ProgressPage'
 import RegistrationPage from './pages/RegistrationPage'
-
+import FullScreenLoader from './components/master-layout/FullScreenLoader';
 
 
 
@@ -34,6 +34,7 @@ function App() {
           <Route exact path='/Registration' element={<RegistrationPage />}/>
         </Routes>
       </BrowserRouter>
+      <FullScreenLoader />
     </Fragment>
   );
 }

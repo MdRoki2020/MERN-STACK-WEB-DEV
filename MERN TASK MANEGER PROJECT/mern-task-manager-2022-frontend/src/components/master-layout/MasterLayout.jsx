@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import {AiFillProfile, AiOutlineMenuUnfold, AiOutlineLogout, AiFillDashboard} from "react-icons/ai";
 import { FaCreativeCommonsNd,FaUserPlus,FaTachometerAlt,FaRegTimesCircle,FaBraille } from "react-icons/fa";
 import logo from "../../assets/images/logo.svg";
+import roki from "../../assets/images/ROKI.jpg";
 
 const MasterLayout = (props) => {
 
@@ -41,10 +42,10 @@ const MasterLayout = (props) => {
 
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src={logo} alt=""/>
+                            <img className="icon-nav-img icon-nav" src={roki} alt=""/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
-                                    <img className="icon-nav-img" src={logo} alt=""/>
+                                    <img className="icon-nav-img" src={roki} alt=""/>
                                     <h6>Roki</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>

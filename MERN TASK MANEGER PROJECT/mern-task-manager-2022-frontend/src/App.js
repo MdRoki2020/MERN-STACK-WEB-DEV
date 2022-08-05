@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<DashboardPage />}/>
           <Route exact path='/Canceled' element={<CanceledPage />}/>
-          <Route exact path='/All' element={<CompeletedPage />}/>
+          <Route exact path='/Completed' element={<CompeletedPage />}/>
           <Route exact path='/Create' element={<CreatePage />}/>
           <Route exact path='/Login' element={<LoginPage />}/>
           <Route exact path='/All' element={<NewPage />}/>

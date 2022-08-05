@@ -2,6 +2,9 @@ import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
 import { HideLoader, ShowLoader } from "../redux/state-slice/SettingSlice";
 import Store from "../redux/store/Store";
+import {getToken, setToken, setUserDetails} from "../helper/SessionHelper";
+
+const AxiosHeader={headers:{"token":getToken()}}
 
 const BaseUrl="https://mern-task-manager-2022.herokuapp.com/api/v1"
 
@@ -40,4 +43,32 @@ export function RegistrationRequest(email,firstName,lastName,mobile,password,pho
         ErrorToast("Something Went Wrong");
         return false;
     })
+}
+
+
+export function LoginRequest(email,password){
+
+    Store.dispatch(ShowLoader())
+
+    let URL=BaseUrl+"/login";
+    let PostBody={"email":email,"password":password}
+    return axios.post(URL,PostBody).then((res)=>{
+        Store.dispatch(HideLoader())
+
+        if(res.status===200){
+
+            setToken(res.data['token']);
+            setUserDetails(res.data['data']);
+            SuccessToast("Login Success")
+            return true;
+        }
+        else{
+            ErrorToast("Invalid Email or Password")
+            return  false;
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+        return false;
+    });
 }

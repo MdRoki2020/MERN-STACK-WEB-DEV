@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DashboardPage from './pages/DashboardPage'
 import CanceledPage from './pages/CanceledPage'
@@ -13,30 +13,49 @@ import ProfilePage from './pages/ProfilePage'
 import ProgressPage from './pages/ProgressPage'
 import RegistrationPage from './pages/RegistrationPage'
 import FullScreenLoader from './components/master-layout/FullScreenLoader';
+import { getToken } from './helper/SessionHelper';
 
 
 
 function App() {
-  return (
-    <Fragment>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path='/' element={<DashboardPage />}/>
-          <Route exact path='/Canceled' element={<CanceledPage />}/>
-          <Route exact path='/Completed' element={<CompeletedPage />}/>
-          <Route exact path='/Create' element={<CreatePage />}/>
-          <Route exact path='/Login' element={<LoginPage />}/>
-          <Route exact path='/All' element={<NewPage />}/>
-          <Route exact path='/*' element={<Page404 />}/>
-          <Route exact path='/Profile' element={<ProfilePage />}/>
-          <Route exact path='/Forgetpass' element={<ForgetpassPage />}/>
-          <Route exact path='/Progress' element={<ProgressPage />}/>
-          <Route exact path='/Registration' element={<RegistrationPage />}/>
-        </Routes>
-      </BrowserRouter>
-      <FullScreenLoader />
-    </Fragment>
+
+  if(getToken()){
+
+    return (
+      <Fragment>
+          <BrowserRouter>
+              <Routes>
+                  <Route exact path="/" element={<DashboardPage  />}  />
+                  <Route exact path="/Create" element={<CreatePage />}  />
+                  <Route exact path="/All" element={<NewPage />}/>
+                  <Route exact path="/Progress"  element={<ProgressPage />}/>
+                  <Route exact path="/Completed"  element={<CompeletedPage />}/>
+                  <Route exact path="/Canceled" element={<CanceledPage />}/>
+                  <Route exact path="/Profile" element={<ProfilePage />}/>
+                  <Route path="*" element={<Page404/>}/>
+              </Routes>
+          </BrowserRouter>
+          <FullScreenLoader/>
+      </Fragment>
   );
+
+  }else{
+    return (
+      <Fragment>
+          <BrowserRouter>
+              <Routes>
+                  <Route path="/" element={<Navigate to="/Login" replace />}/>
+                  <Route exact path="/Login" element={<LoginPage />}/>
+                  <Route exact path="/Registration" element={<RegistrationPage />}/>
+                  <Route exact path="/forgetPas" element={<ForgetpassPage/>}/>
+                  <Route path="*" element={<Page404/>}/>
+              </Routes>
+          </BrowserRouter>
+          <FullScreenLoader/>
+      </Fragment>
+  );
+  }
+
 }
 
 export default App;

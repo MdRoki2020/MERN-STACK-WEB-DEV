@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { AiOutlineLogin } from "react-icons/ai";
 import { ErrorToast, IsEmail, IsEmpty, IsMobile } from '../../helper/FormHelper';
 import {RegistrationRequest} from '../../APIRequest/APIRequest'
@@ -7,6 +7,7 @@ import {RegistrationRequest} from '../../APIRequest/APIRequest'
 const Registration = () => {
 
     let emailRef,firstNameRef,lastNameRef,mobileRef,passwordRef=useRef();
+    let navigate=useNavigate()
 
     const onRegistration=()=>{
         const email=emailRef.value;
@@ -32,7 +33,7 @@ const Registration = () => {
         }else{
             RegistrationRequest(email,firstName,lastName,mobile,password,"").then((result)=>{
                 if(result===true){
-                    
+                    navigate("/login");
                 }
             })
         }

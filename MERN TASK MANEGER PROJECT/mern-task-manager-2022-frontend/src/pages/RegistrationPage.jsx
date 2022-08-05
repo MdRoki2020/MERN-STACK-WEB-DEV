@@ -1,4 +1,4 @@
-import React, { Suspense,lazy } from 'react'
+import React, { Suspense,lazy, Fragment } from 'react'
 import LazyLoader from '../components/master-layout/LazyLoader'
 import MasterLayout from '../components/master-layout/MasterLayout'
 const Registration = lazy(()=> import('../components/registration/Registration'))
@@ -7,13 +7,13 @@ const Registration = lazy(()=> import('../components/registration/Registration')
 const RegistrationPage = () => {
   return (
     <div>
-      <MasterLayout>
+      <Fragment>
       <Suspense fallback={<LazyLoader />}>
 
           <Registration />
           
       </Suspense>
-      </MasterLayout>
+      </Fragment>
     </div>
   )
 }

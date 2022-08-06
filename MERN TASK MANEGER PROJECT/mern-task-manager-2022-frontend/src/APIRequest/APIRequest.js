@@ -72,3 +72,30 @@ export function LoginRequest(email,password){
         return false;
     });
 }
+
+
+export function NewTaskRequest(title,description){
+
+    Store.dispatch(ShowLoader())
+
+    let URL=BaseUrl+"/createTask";
+    let PostBody={email:title,password:description,status:"New"}
+
+    return axios.post(URL,PostBody,AxiosHeader).then((res)=>{
+        Store.dispatch(HideLoader())
+
+        if(res.status===200){
+            SuccessToast("New Task Created")
+            return true;
+        }else{
+            ErrorToast("Something Went Wrong")
+            return false;
+        }
+        
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+        return false;
+    })
+
+}

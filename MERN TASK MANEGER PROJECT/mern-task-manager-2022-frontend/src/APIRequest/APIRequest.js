@@ -80,7 +80,7 @@ export function NewTaskRequest(title,description){
     Store.dispatch(ShowLoader())
 
     let URL=BaseUrl+"/createTask";
-    let PostBody={email:title,password:description,status:"New"}
+    let PostBody={title:title,description:description,status:"New"}
 
     return axios.post(URL,PostBody,AxiosHeader).then((res)=>{
         Store.dispatch(HideLoader())
@@ -119,7 +119,6 @@ export function TaskListByStatus(Status){
                 Store.dispatch(SetCanceledTask(res.data['data']))
             }
             else if(Status==="Progress"){
-                debugger;
                 Store.dispatch(SetProgressTask(res.data['data']))
             }
         }

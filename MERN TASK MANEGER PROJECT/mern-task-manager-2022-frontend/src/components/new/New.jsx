@@ -1,8 +1,17 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {Container} from 'react-bootstrap'
 import {AiOutlineEdit,AiTwotoneCalendar,AiFillDelete} from "react-icons/ai";
+import { useSelector } from 'react-redux';
+import { TaskListByStatus } from '../../APIRequest/APIRequest';
 
 const New = () => {
+
+    useEffect(()=>{
+        TaskListByStatus("New")
+    },[])
+
+    const NewList=useSelector((state)=>state.task.New)
+
   return (
     <Fragment>
             <Container fluid={true} className="content-body">
@@ -22,20 +31,27 @@ const New = () => {
                     </div>
                 </div>
                 <div className="row p-0 m-0">
-                <div className="col-12 col-lg-4 col-sm-6 col-md-4  p-2">
-                <div className="card h-100">
-                    <div className="card-body">
-                      <h6 className="animated fadeInUp">title</h6>
-                          <p className="animated fadeInUp">description</p>
-                          <p className="m-0 animated fadeInUp p-0">
-                          <AiTwotoneCalendar/> created date
-                          <a className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
-                          <a className="icon-nav text-danger mx-1"><AiFillDelete /></a>
-                          <a className="badge float-end bg-success">status</a>
-                          </p>
-                    </div>
-                </div>
-                </div>
+                
+                    {
+
+                    NewList.map((item,i)=>
+                        <div key={i.toString()} className="col-12 col-lg-4 col-sm-6 col-md-4  p-2">
+                        <div className="card h-100">
+                            <div className="card-body">
+                                <h6 className="animated fadeInUp">{item.title}</h6>
+                                <p className="animated fadeInUp">description</p>
+                                <p className="m-0 animated fadeInUp p-0">
+                                    <AiTwotoneCalendar/> {item.createdDate.date}
+                                    <a  className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
+                                    <a  className="icon-nav text-danger mx-1"><AiFillDelete /></a>
+                                    <a className="badge float-end bg-info">status</a>
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+
+                    )}
+
                 </div>
             </Container>
         </Fragment>

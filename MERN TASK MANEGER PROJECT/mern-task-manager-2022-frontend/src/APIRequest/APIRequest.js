@@ -3,6 +3,7 @@ import { ErrorToast, SuccessToast } from "../helper/FormHelper";
 import { HideLoader, ShowLoader } from "../redux/state-slice/SettingSlice";
 import Store from "../redux/store/Store";
 import {getToken, setToken, setUserDetails} from "../helper/SessionHelper";
+import { SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask } from "../redux/state-slice/TaskSlice";
 
 const AxiosHeader={headers:{"token":getToken()}}
 
@@ -98,4 +99,35 @@ export function NewTaskRequest(title,description){
         return false;
     })
 
+}
+
+
+
+export function TaskListByStatus(Status){
+    Store.dispatch(ShowLoader())
+    let URL=BaseUrl+"/listTaskByStatus/"+Status;
+    axios.get(URL,AxiosHeader).then((res)=>{
+        Store.dispatch(HideLoader())
+        if(res.status===200){
+            if(Status==="New"){
+                Store.dispatch(SetNewTask(res.data['data']))
+            }
+            else if(Status==="Completed"){
+                Store.dispatch(SetCompletedTask(res.data['data']))
+            }
+            else if(Status==="Canceled"){
+                Store.dispatch(SetCanceledTask(res.data['data']))
+            }
+            else if(Status==="Progress"){
+                debugger;
+                Store.dispatch(SetProgressTask(res.data['data']))
+            }
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+    });
 }

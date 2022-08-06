@@ -3,6 +3,7 @@ import {Container} from 'react-bootstrap'
 import {AiOutlineEdit,AiTwotoneCalendar,AiFillDelete} from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { TaskListByStatus } from '../../APIRequest/APIRequest';
+import { DeleteToDO } from '../../helper/DeleteAlert';
 
 const Compelete = () => {
 
@@ -11,6 +12,14 @@ const Compelete = () => {
     },[])
 
     const CompletedList=useSelector((state)=>state.task.Completed)
+
+    const DeleteItem=(id)=>{
+        DeleteToDO(id).then((result)=>{
+            if(result===true){
+                TaskListByStatus("Completed");
+            }
+        })
+    }
 
   return (
     <Fragment>
@@ -42,7 +51,7 @@ const Compelete = () => {
                                 <p className="m-0 animated fadeInUp p-0">
                                     <AiTwotoneCalendar/>{item.createdDate.date}
                                     <a  className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
-                                    <a  className="icon-nav text-danger mx-1"><AiFillDelete /></a>
+                                    <a onClick={DeleteItem.bind(this,item._id)} className="icon-nav text-danger mx-1"><AiFillDelete /></a>
                                     <a className="badge float-end bg-info">{item.status}</a>
                                 </p>
                             </div>

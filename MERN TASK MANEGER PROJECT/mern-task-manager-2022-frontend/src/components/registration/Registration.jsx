@@ -15,6 +15,7 @@ const Registration = () => {
         const lastName=lastNameRef.value;
         const mobile=mobileRef.value;
         const password=passwordRef.value;
+        const photo='<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQyjBlIeoqNhOBqGZITAaLIhI9DQtIzAMAQASMYAFTvklLAAAAAASUVORK5CYII="/>'
 
         if(IsEmail(email)){
             ErrorToast("Valid Email Address Required !")
@@ -31,7 +32,7 @@ const Registration = () => {
         else if(IsEmpty(password)){
             ErrorToast("Password Required !")
         }else{
-            RegistrationRequest(email,firstName,lastName,mobile,password,"").then((result)=>{
+            RegistrationRequest(email,firstName,lastName,mobile,password,photo).then((result)=>{
                 if(result===true){
                     navigate("/login");
                 }

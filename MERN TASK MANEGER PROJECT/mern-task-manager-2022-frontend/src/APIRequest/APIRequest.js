@@ -172,3 +172,25 @@ export function DeleteRequest(id){
         return false;
     });
 }
+
+
+
+export function UpdateStatusRequest(id,status){
+    Store.dispatch(ShowLoader())
+    let URL=BaseUrl+"/updateTaskStatus/"+id+"/"+status;
+    return axios.get(URL,AxiosHeader).then((res)=>{
+        Store.dispatch(HideLoader())
+        if(res.status===200){
+            SuccessToast("Status Updated")
+            return true;
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+            return false;
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+        return false;
+    });
+}

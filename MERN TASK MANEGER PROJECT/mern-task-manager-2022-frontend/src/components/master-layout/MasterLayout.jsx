@@ -5,13 +5,15 @@ import {AiFillProfile, AiOutlineMenuUnfold, AiOutlineLogout, AiFillDashboard} fr
 import { FaCreativeCommonsNd,FaUserPlus,FaTachometerAlt,FaRegTimesCircle,FaBraille } from "react-icons/fa";
 import logo from "../../assets/images/logo.svg";
 import roki from "../../assets/images/ROKI.jpg";
+import { removeSessions } from "../../helper/SessionHelper";
+
 
 const MasterLayout = (props) => {
 
   let contentRef,sideNavRef=useRef();
 
     const onLogout=()=>{
-        
+        removeSessions();
     }
 
     const MenuBarClickHandler = () => {

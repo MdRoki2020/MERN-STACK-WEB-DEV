@@ -5,6 +5,7 @@ import Store from "../redux/store/Store";
 import {getToken, setToken, setUserDetails} from "../helper/SessionHelper";
 import { SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask } from "../redux/state-slice/TaskSlice";
 import { SetSummary } from "../redux/state-slice/SummarySlice";
+import { SetProfile } from "../redux/state-slice/ProfileSlice";
 
 const AxiosHeader={headers:{"token":getToken()}}
 
@@ -187,6 +188,55 @@ export function UpdateStatusRequest(id,status){
         else{
             ErrorToast("Something Went Wrong")
             return false;
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+        return false;
+    });
+}
+
+
+export function GetProfileDetails(){
+    Store.dispatch(ShowLoader())
+    let URL=BaseUrl+"/profileDetails";
+    axios.get(URL,AxiosHeader).then((res)=>{
+        Store.dispatch(HideLoader())
+        if(res.status===200){
+            Store.dispatch(SetProfile(res.data['data'][0]))
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+    });
+}
+
+
+
+export function ProfileUpdateRequest(email,firstName,lastName,mobile,password,photo){
+
+    Store.dispatch(ShowLoader())
+
+    let URL=BaseUrl+"/profileUpdate";
+
+    let PostBody={email:email,firstName:firstName,lastName:lastName,mobile:mobile,password:password,photo:photo}
+    let UserDetails={email:email,firstName:firstName,lastName:lastName,mobile:mobile,photo:photo}
+
+    return axios.post(URL,PostBody,AxiosHeader).then((res)=>{
+        Store.dispatch(HideLoader())
+        if(res.status===200){
+
+            SuccessToast("Profile Update Success")
+            setUserDetails(UserDetails)
+
+            return true;
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+            return  false;
         }
     }).catch((err)=>{
         ErrorToast("Something Went Wrong")

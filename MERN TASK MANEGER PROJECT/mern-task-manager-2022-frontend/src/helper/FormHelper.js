@@ -24,6 +24,15 @@ class FormHelper {
         cogoToast.success(msg, { position: "top-right" });
     }
 
+    getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    }
+
 }
 
 export const{
@@ -31,5 +40,6 @@ export const{
     IsMobile,
     IsEmail,
     ErrorToast,
-    SuccessToast
+    SuccessToast,
+    getBase64
 }=new FormHelper();

@@ -28,7 +28,7 @@ const Profile = () => {
     
     const UpdateMyProfile = () => {
         let email=emailRef.value;
-        let fastName=firstNameRef.value;
+        let firstName=firstNameRef.value;
         let lastName=lastNameRef.value;
         let mobile=mobileRef.value;
         let password= passwordRef.value;
@@ -37,7 +37,7 @@ const Profile = () => {
         if(IsEmail(email)){
             ErrorToast("Valid Email Address Required !")
         }
-        else if(IsEmpty(fastName)){
+        else if(IsEmpty(firstName)){
             ErrorToast("First Name Required !")
         }
         else if(IsEmpty(lastName)){
@@ -50,7 +50,7 @@ const Profile = () => {
             ErrorToast("Password Required !")
         }
         else{
-            ProfileUpdateRequest(email,fastName,lastName,mobile,password,photo).then((result)=>{
+            ProfileUpdateRequest(email,firstName,lastName,mobile,password,photo).then((result)=>{
                 if(result===true){
                     navigate("/");
                 }

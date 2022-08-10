@@ -2,7 +2,7 @@ import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
 import { HideLoader, ShowLoader } from "../redux/state-slice/SettingSlice";
 import Store from "../redux/store/Store";
-import {getToken, setToken, setUserDetails} from "../helper/SessionHelper";
+import {getToken, setEmail, setToken, setUserDetails} from "../helper/SessionHelper";
 import { SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask } from "../redux/state-slice/TaskSlice";
 import { SetSummary } from "../redux/state-slice/SummarySlice";
 import { SetProfile } from "../redux/state-slice/ProfileSlice";
@@ -250,7 +250,57 @@ export function RecoverVerifyEmailRequest(email){
     Store.dispatch(ShowLoader())
     let URL=BaseUrl+"/RecoverVerifyEmail/"+email;
 
-    return axios.get(URL,AxiosHeader).then((res)=>{
+    return axios.get(URL).then((res)=>{
+        Store.dispatch(HideLoader())
+        if(res.status===200){
+            if(res.data['status']==='fail'){
+                ErrorToast("No User Found");
+                return false;
+            }else{
+                setEmail(email);
+                SuccessToast("A 6 Digit Verification code has been sent to your email address")
+                return true;
+            }
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+            return false;
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+        return false;
+    });
+
+}
+
+
+export function RecoverVerifyOTPRequest(email,OTP){
+    Store.dispatch(ShowLoader())
+    let URL=BaseUrl+"/RecoverVerifyOTP/"+email+"/"+OTP;
+
+    return axios.get(URL).then((res)=>{
+        Store.dispatch(HideLoader())
+        if(res.status===200){
+            return true;
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+        Store.dispatch(HideLoader())
+    });
+
+}
+
+export function RecoverResetPassRequest(email,OTP,password){
+    Store.dispatch(ShowLoader())
+    let URL=BaseUrl+"/RecoverResetPass/";
+
+    let postBody={email:email,OTP:OTP,password:password}
+
+    return axios.post(URL,postBody).then((res)=>{
         Store.dispatch(HideLoader())
         if(res.status===200){
             return true;
